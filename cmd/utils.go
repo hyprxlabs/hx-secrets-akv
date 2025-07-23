@@ -42,28 +42,30 @@ func getCredential(interactive *string, ctx context.Context) (azcore.TokenCreden
 									continue
 								}
 
-								if key == "AZURE_CLIENT_SECRET_KEY" {
-									if node.Value == "true" || node.Value == "1" {
-										node.Value = "CLIENT_SECRET"
+								/*
+									if key == "AZURE_CLIENT_SECRET_KEY" {
+										if node.Value == "true" || node.Value == "1" {
+											node.Value = "CLIENT_SECRET"
+										}
+
+										secretValue, err := getOsSecret(node.Value, "hyprx-secrets-akv")
+										if err == nil {
+											env.Set("AZURE_CLIENT_SECRET", secretValue)
+										}
+										continue
 									}
 
-									secretValue, err := getOsSecret(node.Value, "hyprx-secrets-akv")
-									if err == nil {
-										env.Set("AZURE_CLIENT_SECRET", secretValue)
+									if key == "AZURE_CLIENT_CERTIFICATE_PASSWORD_KEY" {
+										if node.Value == "true" || node.Value == "1" {
+											node.Value = "CERTIFICATE_PASSWORD"
+										}
+										secretValue, err := getOsSecret(node.Value, "hyprx-secrets-akv")
+										if err == nil {
+											env.Set("AZURE_CLIENT_CERTIFICATE_PASSWORD", secretValue)
+										}
+										continue
 									}
-									continue
-								}
-
-								if key == "AZURE_CLIENT_CERTIFICATE_PASSWORD_KEY" {
-									if node.Value == "true" || node.Value == "1" {
-										node.Value = "CERTIFICATE_PASSWORD"
-									}
-									secretValue, err := getOsSecret(node.Value, "hyprx-secrets-akv")
-									if err == nil {
-										env.Set("AZURE_CLIENT_CERTIFICATE_PASSWORD", secretValue)
-									}
-									continue
-								}
+								*/
 
 								if strings.HasPrefix(key, "AZURE_") {
 									env.Set(key, node.Value)

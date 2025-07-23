@@ -50,25 +50,26 @@ var configSetCmd = &cobra.Command{
 			value = args[1]
 		}
 
-		if name == "client.secret" {
-			err := setOsSecret("CLIENT_SECRET", "hyprx-secrets-akv", value)
-			if err != nil {
-				cmd.PrintErrf("Error setting client secret: %v\n", err)
-				os.Exit(CODE_ERROR)
-			} else {
-				value = "true"
+		/*
+			if name == "client.secret" {
+				err := setOsSecret("CLIENT_SECRET", "hyprx-secrets-akv", value)
+				if err != nil {
+					cmd.PrintErrf("Error setting client secret: %v\n", err)
+					os.Exit(CODE_ERROR)
+				} else {
+					value = "true"
+				}
 			}
-		}
 
-		if name == "client.certificate.password" {
-			err := setOsSecret("CERTIFICATE_PASSWORD", "hyprx-secrets-akv", value)
-			if err != nil {
-				cmd.PrintErrf("Error setting client certificate password: %v\n", err)
-				os.Exit(CODE_ERROR)
-			} else {
-				value = "true"
-			}
-		}
+			if name == "client.certificate.password" {
+				err := setOsSecret("CERTIFICATE_PASSWORD", "hyprx-secrets-akv", value)
+				if err != nil {
+					cmd.PrintErrf("Error setting client certificate password: %v\n", err)
+					os.Exit(CODE_ERROR)
+				} else {
+					value = "true"
+				}
+			}*/
 
 		envName := ""
 
