@@ -1,0 +1,70 @@
+version: 2
+builds:
+  - id: hx-secrets-akv
+    binary: hx-secrets-akv
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    main: ./main.go
+    hooks:
+      pre: go mod tidy
+      post: go mod tidy
+
+checksum:
+  # You can change the name of the checksums file.
+  #
+  # Default: '{{ .ProjectName }}_{{ .Version }}_checksums.txt', or,
+  #   when split is set: '{{ .ArtifactName }}.{{ .Algorithm }}'.
+  # Templates: allowed.
+  name_template: "{{ .ProjectName }}-checksums.txt"
+
+archives:
+  - id: hx-secrets-akv
+    formats: [tar.gz]
+    name_template: "{{ .ProjectName }}-{{ .Os }}-{{ .Arch }}-{{ .Version }}"
+    format_overrides:
+      - goos: windows
+        formats: [zip, tar.gz]
+
+    files:
+      - LICENSE.md
+      - README.md
+
+nfpms:
+  - id: hx-secrets-akv
+    description:  |
+      hx-secrets-akv manages secrets in Azure Key Vault."
+    homepage: "https://github.com/hyprxlabs/hx-secrets-akv"
+    file_name_template: "{{ .PackageName }}-{{ .Os }}-{{ .Arch}}-{{ .Version }}"
+    maintainer: "Hyprxdev <180069990+hyprxdev@users.noreply.github.com>"
+    license: "MIT"
+    formats:
+      - deb
+      - rpm
+      - archlinux
+      - apk
+
+chocolateys:
+  - name: hx-secrets-akv
+    description: |
+      A cross-platform cli-app for managing secrets in Azure Key Vault.
+
+      The `hx-secrets-akv` command allows you to get, set, list, remove,
+      purge and resolve secrets in Azure Key Vault.
+    package_source_url: "https://github.com/hyprxlabs/hx-secrets-akv"
+    title: "hx-secrets-akv"
+    project_url: "https://github.com/hyprxlabs/hx-secrets-akv"
+    copyright: "Copyright © 2025 hyprxdev hyprxlabs"
+    require_license_acceptance: false
+    icon_url: "https://raw.githubusercontent.com/hyprxlabs/dotnet/refs/heads/main/eng/assets/hyprx_logo_256.png"
+    authors: "Hyprxdev <180069990+hyprxdev@users.noreply.github.com>"
+    tags: "azure keyvault command-line"
+    summary: "hx-secrets-akv is a crossplatform cli app for managing secrets in Azure Key Vault."
+    release_notes: "https://github.com/foo/bar/releases/tag/v{{ .Version }}"
+    skip_publish: true
+
+    
