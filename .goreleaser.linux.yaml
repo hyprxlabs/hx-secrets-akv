@@ -1,0 +1,17 @@
+version: 2
+builds:
+  - id: hx-secrets-akv-linux
+    binary: hx-secrets-akv
+    goos:
+      - linux
+    goarch:
+      - amd64
+      - arm64
+    goarm: 
+      - "7"
+    main: ./main.go
+    hooks:
+      pre: go mod tidy
+      post: go mod tidy
+    env:
+      - CGO_ENABLED=1
