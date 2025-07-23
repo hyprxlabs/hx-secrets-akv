@@ -1,18 +1,44 @@
 version: 2
 builds:
-  - id: hx-secrets-akv
+  - id: hx-secrets-akv-linux
     binary: hx-secrets-akv
     goos:
       - linux
-      - darwin
-      - windows
     goarch:
       - amd64
-      - arm64
+    goarm: 
+      - "7"
     main: ./main.go
     hooks:
       pre: go mod tidy
       post: go mod tidy
+    env:
+      - CGO_ENABLED=1
+
+  - id: hx-secrets-akv-windows
+    binary: hx-secrets-akv.exe
+    goos:
+      - windows
+    goarch:
+      - amd64
+    goarm: 
+      - "7"
+    main: ./main.go
+    env:
+      - CGO_ENABLED=1
+
+  - id: hx-secrets-akv-darwin
+    binary: hx-secrets-akv
+    goos:
+      - darwin
+    goarch:
+      - arm64
+    main: ./main.go
+    env:
+      - CGO_ENABLED=1
+      
+   
+    # You can set the go version to use for building.
 
 checksum:
   # You can change the name of the checksums file.

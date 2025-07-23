@@ -7,6 +7,7 @@ import (
 	"path/filepath"
 
 	"github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+	"github.com/Azure/azure-sdk-for-go/sdk/azidentity/cache"
 )
 
 // this example shows file storage but any form of byte storage would work
@@ -94,11 +95,17 @@ func newDeviceCode(ctx context.Context) (*azidentity.DeviceCodeCredential, error
 		return nil, err
 	}
 
+	c, err := cache.New(nil)
+	if err != nil {
+		return nil, err
+	}
+
 	cred, err := azidentity.NewDeviceCodeCredential(&azidentity.DeviceCodeCredentialOptions{
 		// If record is zero, the credential will start with no user logged in
 		AuthenticationRecord: record,
 		// Credentials cache in memory by default. Setting Cache with a
 		// nonzero value from cache.New() enables persistent caching.
+		Cache: c,
 	})
 	if err != nil {
 		return nil, err
